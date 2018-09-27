@@ -13,14 +13,10 @@ void delay_ms(uint32_t n)
 void main()
 {
     BSP_Init();
-    
+      
     while(1)
     {
-        GPIOB->BRR=GPIO_Pin_5;
-        GPIOE->BSRR=GPIO_Pin_5;
-        delay_ms(300);
-        GPIOB->BSRR=GPIO_Pin_5;
-        GPIOE->BRR=GPIO_Pin_5;
+        printf("Test\n");
         delay_ms(300);
     }
 }
