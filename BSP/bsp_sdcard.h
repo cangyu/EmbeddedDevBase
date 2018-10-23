@@ -1,5 +1,5 @@
-#ifndef __BSP_SDIO_SDCARD_H__
-#define __BSP_SDIO_SDCARD_H__
+#ifndef __BSP_SDCARD_H__
+#define __BSP_SDCARD_H__
 
 #ifdef __cplusplus
 extern "C" {

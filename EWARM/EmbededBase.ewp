@@ -2053,7 +2053,10 @@
             <name>$PROJ_DIR$\..\BSP\bsp.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\BSP\bsp_sdio_sdcard.c</name>
+            <name>$PROJ_DIR$\..\BSP\bsp_sdcard.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\BSP\bsp_w25qxx.c</name>
         </file>
         <file>
             <name>$PROJ_DIR$\..\BSP\stm32f10x_it.c</name>

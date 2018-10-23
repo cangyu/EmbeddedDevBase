@@ -1,10 +1,10 @@
 #include <string.h>
-#include "bsp_sdio_sdcard.h"
+#include "bsp_sdcard.h"
 
 #define INTX_DISABLE() __set_PRIMASK(1)
 #define INTX_ENABLE() __set_PRIMASK(0)
 
-//用于sdio初始化的结构体
+//用于SDIO初始化的结构体
 SDIO_InitTypeDef SDIO_InitStructure;
 SDIO_CmdInitTypeDef SDIO_CmdInitStructure;
 SDIO_DataInitTypeDef SDIO_DataInitStructure;   
