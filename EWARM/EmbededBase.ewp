@@ -345,6 +345,7 @@
                     <state>$PROJ_DIR$\..\APP</state>
                     <state>$PROJ_DIR$\..\3rd_party\STM32_USB-FS-Device_Driver\inc</state>
                     <state>$PROJ_DIR$\..\3rd_party\STM32F10x_StdPeriph_Driver\inc</state>
+                    <state>$PROJ_DIR$\..\3rd_party\FATFS</state>
                 </option>
                 <option>
                     <name>CCStdIncCheck</name>
@@ -2056,9 +2057,6 @@
             <name>$PROJ_DIR$\..\BSP\bsp_sdcard.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\BSP\bsp_w25qxx.c</name>
-        </file>
-        <file>
             <name>$PROJ_DIR$\..\BSP\stm32f10x_it.c</name>
         </file>
         <file>
@@ -2069,6 +2067,21 @@
         <name>CMSIS</name>
         <file>
             <name>$PROJ_DIR$\startup_stm32f10x_hd.s</name>
+        </file>
+    </group>
+    <group>
+        <name>FATFS</name>
+        <file>
+            <name>$PROJ_DIR$\..\3rd_party\FATFS\diskio.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\3rd_party\FATFS\ff.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\3rd_party\FATFS\ffsystem.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\3rd_party\FATFS\ffunicode.c</name>
         </file>
     </group>
     <group>
