@@ -1,6 +1,11 @@
 #include "bsp.h"
 
-void BSP_LED_Init()
+bool BSP_FLAG_SD_EXIST = false;
+bool BSP_FLAGE_W25QXX_EXIST = true;
+
+FATFS BSP_FS_Handle[2], *BSP_FS_SD, *BSP_FS_W25QXX;
+
+void BSP_LED_Init(void)
 {
     GPIO_InitTypeDef  GPIO_InitStructure;
 
@@ -46,13 +51,25 @@ void BSP_LED_SetOff(uint8_t idx)
     }
 }
 
+bool BSP_SD_IsAvailable(void)
+{
+    return BSP_FLAG_SD_EXIST;
+}
+
+bool BSP_W25QXX_IsAvailable(void)
+{
+    return true;
+}
+
 void BSP_Init(void)
 {
     BSP_LED_Init();
+    BSP_FLAG_SD_EXIST = !SD_Init();
     
-    if(!SD_Init())
-      printf("SD Card OK!\n");
-    else       
-        printf("No SD Card!\n");
+    BSP_FS_SD = &BSP_FS_Handle[0];
+    BSP_FS_W25QXX = &BSP_FS_Handle[1];
+    
+    f_mount(BSP_FS_SD, "0:", 1);
+    f_mount(BSP_FS_W25QXX, "1:", 1);
 }
 

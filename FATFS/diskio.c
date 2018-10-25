@@ -9,6 +9,7 @@
 
 #include "ff.h"			/* Obtains integer types */
 #include "diskio.h"		/* Declarations of disk functions */
+#include "bsp_sdcard.h"
 
 /* Definitions of physical drive number for each drive */
 #define DEV_SD 0        /* Map SD card to physical drive 0 */
@@ -24,26 +25,20 @@ DSTATUS disk_status (
 )
 {
 	DSTATUS stat;
-	int result;
 
 	switch (pdrv) 
     {
 	case DEV_SD :
-		result = MMC_disk_status();
-
-		// translate the reslut code here
-
-		return stat;
-
+        stat = BSP_SD_IsAvailable() ? STA_OK : STA_NODISK;
+        break;
 	case DEV_W25QXX :
-		result = USB_disk_status();
-
-		// translate the reslut code here
-
-		return stat;
+        stat = BSP_W25QXX_IsAvailable() ? STA_OK : STA_NODISK;
+        break;
     default:
-        return STA_NODISK;
+        stat = STA_NODISK;
 	}
+    
+    return stat;
 }
 
 
@@ -56,24 +51,11 @@ DSTATUS disk_initialize (
 	BYTE pdrv				/* Physical drive nmuber to identify the drive */
 )
 {
-	DSTATUS stat;
-	int result;
-
 	switch (pdrv) 
     {
-	case DEV_SD :
-		result = MMC_disk_initialize();
-
-		// translate the reslut code here
-
-		return stat;
-
-	case DEV_W25QXX :
-		result = USB_disk_initialize();
-
-		// translate the reslut code here
-
-		return stat;
+	case DEV_SD:
+	case DEV_W25QXX:
+		return STA_OK;
     default:
         return STA_NODISK;
 	}
@@ -94,26 +76,18 @@ DRESULT disk_read (
 {
 	DRESULT res;
 	int result;
+    
+    if(!count)
+        return RES_PARERR;
 
 	switch (pdrv)
     {
 	case DEV_SD :
-		// translate the arguments here
-
-		result = MMC_disk_read(buff, sector, count);
-
-		// translate the reslut code here
-
+		result=SD_WriteDisk((u8*)buff,sector,count);
+        res = result ? RES_ERROR : RES_OK;
 		return res;
-
 	case DEV_W25QXX :
-		// translate the arguments here
-
-		result = USB_disk_read(buff, sector, count);
-
-		// translate the reslut code here
-
-		return res;
+		return RES_OK;
     default:
         return RES_PARERR;
 	}	
@@ -136,26 +110,18 @@ DRESULT disk_write (
 {
 	DRESULT res;
 	int result;
+    
+    if(!count)
+        return RES_PARERR;
 
 	switch (pdrv)
     {
 	case DEV_SD :
-		// translate the arguments here
-
-		result = MMC_disk_write(buff, sector, count);
-
-		// translate the reslut code here
-
+		result = SD_WriteDisk((u8*)buff,sector,count);
+        res = result ? RES_ERROR : RES_OK;
 		return res;
-
 	case DEV_W25QXX :
-		// translate the arguments here
-
-		result = USB_disk_write(buff, sector, count);
-
-		// translate the reslut code here
-
-		return res;
+		return RES_OK;
     default:
         return RES_PARERR;
 	}
@@ -174,22 +140,11 @@ DRESULT disk_ioctl (
 	void *buff		/* Buffer to send/receive control data */
 )
 {
-	DRESULT res;
-	int result;
-
 	switch (pdrv)
     {
-	case DEV_SD :
-
-		// Process of the command for the MMC/SD card
-
-		return res;
-
-	case DEV_W25QXX :
-
-		// Process of the command the USB drive
-
-		return res;
+	case DEV_SD:
+	case DEV_W25QXX:
+        return RES_OK;
     default:
         return RES_PARERR;
 	}

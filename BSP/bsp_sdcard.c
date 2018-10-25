@@ -20,14 +20,27 @@ SD_Error IsCardProgramming(u8 *pstatus);
 SD_Error FindSCR(u16 rca,u32 *pscr);
 u8 convert_from_bytes_to_power_of_two(u16 NumberOfBytes); 
 
+//SD卡类型（默认为1.x卡）
+static u8 CardType=SDIO_STD_CAPACITY_SD_CARD_V1_1;
 
-static u8 CardType=SDIO_STD_CAPACITY_SD_CARD_V1_1;		//SD卡类型（默认为1.x卡）
-static u32 CSD_Tab[4],CID_Tab[4],RCA=0;					//SD卡CSD,CID以及相对地址(RCA)数据
-static u8 DeviceMode=SD_DMA_MODE;		   				//工作模式,注意,工作模式必须通过SD_SetDeviceMode,后才算数.这里只是定义一个默认的模式(SD_DMA_MODE)
-static u8 StopCondition=0; 								//是否发送停止传输标志位,DMA多块读写的时候用到  
-volatile SD_Error TransferError=SD_OK;					//数据传输错误标志,DMA读写时使用	    
-volatile u8 TransferEnd=0;								//传输结束标志,DMA读写时使用
-SD_CardInfo SDCardInfo;									//SD卡信息
+//SD卡CSD,CID以及相对地址(RCA)数据
+static u32 CSD_Tab[4],CID_Tab[4],RCA=0;
+
+//工作模式,注意,工作模式必须通过SD_SetDeviceMode后才算数.
+//这里只是定义一个默认的模式(SD_DMA_MODE)
+static u8 DeviceMode=SD_DMA_MODE;		   				
+
+//是否发送停止传输标志位,DMA多块读写的时候用到  
+static u8 StopCondition=0; 								
+
+//数据传输错误标志,DMA读写时使用
+volatile SD_Error TransferError=SD_OK;					   
+
+//传输结束标志,DMA读写时使用
+volatile u8 TransferEnd=0;								
+
+//SD卡信息
+SD_CardInfo SDCardInfo;
 
 //SD_ReadDisk/SD_WriteDisk函数专用buf,
 //当这两个函数的数据缓存区地址不是4字节对齐的时候,
@@ -103,15 +116,16 @@ SD_Error SD_Init(void)
  	}
 	return errorstatus;		 
 }
+
 //SDIO时钟初始化设置
 //clkdiv:时钟分频系数
 //CK时钟=SDIOCLK/[clkdiv+2];(SDIOCLK时钟固定为48Mhz)
 void SDIO_Clock_Set(u8 clkdiv)
 {
-	u32 tmpreg=SDIO->CLKCR; 
-  tmpreg&=0XFFFFFF00; 
- 	tmpreg|=clkdiv;   
-	SDIO->CLKCR=tmpreg;
+    u32 tmpreg=SDIO->CLKCR; 
+    tmpreg&=0XFFFFFF00; 
+    tmpreg|=clkdiv;   
+    SDIO->CLKCR=tmpreg;
 } 
  
 //卡上电
@@ -147,9 +161,11 @@ SD_Error SD_PowerON(void)
     SDIO_SendCommand(&SDIO_CmdInitStructure);	  		//写命令进命令寄存器
 		
 		errorstatus=CmdError();
-		if(errorstatus==SD_OK)break;
+		if(errorstatus==SD_OK)
+          break;
  	}
- 	if(errorstatus)return errorstatus;//返回错误状态
+ 	if(errorstatus)
+      return errorstatus;//返回错误状态
 
 	SDIO_CmdInitStructure.SDIO_Argument = SD_CHECK_PATTERN;	//发送CMD8,短响应,检查SD卡接口特性
   SDIO_CmdInitStructure.SDIO_CmdIndex = SDIO_SEND_IF_COND;	//cmd8
@@ -463,8 +479,10 @@ SD_Error SD_EnableWideBusOperation(u32 wmode)
 SD_Error SD_SetDeviceMode(u32 Mode)
 {
 	SD_Error errorstatus = SD_OK;
- 	if((Mode==SD_DMA_MODE)||(Mode==SD_POLLING_MODE))DeviceMode=Mode;
-	else errorstatus=SD_INVALID_PARAMETER;
+ 	if((Mode==SD_DMA_MODE)||(Mode==SD_POLLING_MODE))
+      DeviceMode=Mode;
+	else
+      errorstatus=SD_INVALID_PARAMETER;
 	return errorstatus;	    
 }
 //选卡
@@ -472,7 +490,6 @@ SD_Error SD_SetDeviceMode(u32 Mode)
 //addr:卡的RCA地址
 SD_Error SD_SelectDeselect(u32 addr)
 {
-
 	SDIO_CmdInitStructure.SDIO_Argument =  addr;//发送CMD7,选择卡,短响应	
   SDIO_CmdInitStructure.SDIO_CmdIndex = SD_CMD_SEL_DESEL_CARD;
   SDIO_CmdInitStructure.SDIO_Response = SDIO_Response_Short;
@@ -589,9 +606,10 @@ SD_Error SD_ReadBlock(u8 *buf,long long addr,u16 blksize)
 		}
 		INTX_ENABLE();//开启总中断
 		SDIO_ClearFlag(SDIO_STATIC_FLAGS);//清除所有标记
-	}else if(DeviceMode==SD_DMA_MODE)
+	}
+    else if(DeviceMode==SD_DMA_MODE)
 	{
-  	SD_DMA_Config((u32*)buf,blksize,DMA_DIR_PeripheralSRC); 
+        SD_DMA_Config((u32*)buf,blksize,DMA_DIR_PeripheralSRC); 
 		TransferError=SD_OK;
 		StopCondition=0;			//单块读,不需要发送停止传输指令
 		TransferEnd=0;				//传输结束标置位，在中断服务置1
@@ -1616,8 +1634,10 @@ u8 SD_WriteDisk(u8*buf,u32 sector,u8 cnt)
 		} 
 	}else
 	{
-		if(cnt==1)sta=SD_WriteBlock(buf,lsector,512);    	//单个sector的写操作
-		else sta=SD_WriteMultiBlocks(buf,lsector,512,cnt);	//多个sector  
+		if(cnt==1)
+          sta=SD_WriteBlock(buf,lsector,512);    	//单个sector的写操作
+		else
+          sta=SD_WriteMultiBlocks(buf,lsector,512,cnt);	//多个sector  
 	}
 	return sta;
 }

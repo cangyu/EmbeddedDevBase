@@ -2,6 +2,7 @@ EWARM/Debug
 EWARM/Release
 EWARM/settings
 EWARM/*.ewt
+EWARM/*.dep
 
 # Prerequisites
 *.d
