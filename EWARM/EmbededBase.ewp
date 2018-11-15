@@ -343,9 +343,7 @@
                     <name>CCIncludePath2</name>
                     <state>$PROJ_DIR$\..\BSP</state>
                     <state>$PROJ_DIR$\..\APP</state>
-                    <state>$PROJ_DIR$\..\LIB\STM32_USB-FS-Device_Driver\inc</state>
                     <state>$PROJ_DIR$\..\LIB\STM32F10x_StdPeriph_Driver\inc</state>
-                    <state>$PROJ_DIR$\..\FATFS</state>
                 </option>
                 <option>
                     <name>CCStdIncCheck</name>
@@ -2054,9 +2052,6 @@
             <name>$PROJ_DIR$\..\BSP\bsp.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\BSP\bsp_sdcard.c</name>
-        </file>
-        <file>
             <name>$PROJ_DIR$\..\BSP\stm32f10x_it.c</name>
         </file>
         <file>
@@ -2067,21 +2062,6 @@
         <name>CMSIS</name>
         <file>
             <name>$PROJ_DIR$\startup_stm32f10x_hd.s</name>
-        </file>
-    </group>
-    <group>
-        <name>FATFS</name>
-        <file>
-            <name>$PROJ_DIR$\..\FATFS\diskio.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\FATFS\ff.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\FATFS\ffsystem.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\FATFS\ffunicode.c</name>
         </file>
     </group>
     <group>
