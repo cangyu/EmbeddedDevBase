@@ -1,9 +1,16 @@
 #include "bsp.h"
 
+uint32_t volatile BSP_DLY_COUNTER = 0;
 bool BSP_FLAG_SD_EXIST = false;
 bool BSP_FLAGE_W25QXX_EXIST = true;
 
 FATFS BSP_FS_Handle[2], *BSP_FS_SD, *BSP_FS_W25QXX;
+
+void BSP_DLY_MS(uint32_t n)
+{
+    BSP_DLY_COUNTER = n;
+    while(BSP_DLY_COUNTER);
+}
 
 void BSP_LED_Init(void)
 {
@@ -26,10 +33,10 @@ void BSP_LED_SetOn(uint8_t idx)
     switch(idx)
     {
     case 0:
-        GPIO_ResetBits(GPIOB,GPIO_Pin_5);
+        GPIO_ResetBits(LED1_GPIO,LED1_PIN);
         break;
     case 1:
-        GPIO_ResetBits(GPIOE,GPIO_Pin_5);
+        GPIO_ResetBits(LED2_GPIO,LED2_PIN);
         break;
     default:
         break;
@@ -41,10 +48,25 @@ void BSP_LED_SetOff(uint8_t idx)
     switch(idx)
     {
     case 0:
-        GPIO_SetBits(GPIOB,GPIO_Pin_5);
+        GPIO_SetBits(LED1_GPIO,LED1_PIN);
         break;
     case 1:
-        GPIO_SetBits(GPIOE,GPIO_Pin_5);
+        GPIO_SetBits(LED2_GPIO,LED2_PIN);
+        break;
+    default:
+        break;
+    }
+}
+
+void BSP_LED_Toggle(uint8_t idx)
+{
+    switch(idx)
+    {
+    case 0:
+        LED1_GPIO->ODR ^= LED1_PIN;
+        break;
+    case 1:
+        LED2_GPIO->ODR ^= LED2_PIN;
         break;
     default:
         break;
@@ -63,6 +85,8 @@ bool BSP_W25QXX_IsAvailable(void)
 
 void BSP_Init(void)
 {
+    SysTick_Config(SystemCoreClock/1000);
+  
     BSP_LED_Init();
     BSP_FLAG_SD_EXIST = !SD_Init();
     

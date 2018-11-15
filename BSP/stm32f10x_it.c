@@ -23,7 +23,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x_it.h" 
-
+#include "bsp.h"
 
  
 void NMI_Handler(void)
@@ -77,6 +77,10 @@ void PendSV_Handler(void)
  
 void SysTick_Handler(void)
 {
+    if(BSP_DLY_COUNTER)
+    {
+        --BSP_DLY_COUNTER;
+    }
 }
 
 /******************************************************************************/
