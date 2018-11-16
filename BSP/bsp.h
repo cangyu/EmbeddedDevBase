@@ -10,10 +10,10 @@ extern "C" {
 #include <stdbool.h>
 #include "stm32f10x.h"
   
-#define LED1_GPIO GPIOB
-#define LED1_PIN GPIO_Pin_5
+#define LED1_GPIO GPIOC
+#define LED1_PIN GPIO_Pin_13
 #define LED2_GPIO GPIOE
-#define LED2_PIN GPIO_Pin_5
+#define LED2_PIN GPIO_Pin_5    
 
 extern volatile uint32_t BSP_DLY_COUNTER;
 
