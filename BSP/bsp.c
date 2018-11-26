@@ -1,6 +1,10 @@
 #include "bsp.h"
 
 uint32_t volatile BSP_DLY_COUNTER = 0;
+bool BSP_FLAG_SD_EXIST = false;
+bool BSP_FLAGE_W25QXX_EXIST = true;
+
+FATFS BSP_FS_Handle[2], *BSP_FS_SD, *BSP_FS_W25QXX;
 
 void BSP_DLY_MS(uint32_t n)
 {
@@ -12,13 +16,15 @@ void BSP_LED_Init(void)
 {
     GPIO_InitTypeDef  GPIO_InitStructure;
 
-    GPIO_InitStructure.GPIO_Pin = LED1_PIN;
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB|RCC_APB2Periph_GPIOE, ENABLE);
+
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_5;
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-    GPIO_Init(LED1_GPIO, &GPIO_InitStructure);
+    GPIO_Init(GPIOB, &GPIO_InitStructure);
     
-    GPIO_InitStructure.GPIO_Pin = LED2_PIN;
-    GPIO_Init(LED2_GPIO, &GPIO_InitStructure);
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_5;
+    GPIO_Init(GPIOE, &GPIO_InitStructure);
     	
 }
 
@@ -67,17 +73,27 @@ void BSP_LED_Toggle(uint8_t idx)
     }
 }
 
+bool BSP_SD_IsAvailable(void)
+{
+    return BSP_FLAG_SD_EXIST;
+}
+
+bool BSP_W25QXX_IsAvailable(void)
+{
+    return true;
+}
+
 void BSP_Init(void)
-{   
-    //SysTick
+{
     SysTick_Config(SystemCoreClock/1000);
-    
-    //Clock
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC, ENABLE);
-    
-    //BSP
+  
     BSP_LED_Init();
+    BSP_FLAG_SD_EXIST = !SD_Init();
+    
+    BSP_FS_SD = &BSP_FS_Handle[0];
+    BSP_FS_W25QXX = &BSP_FS_Handle[1];
+    
+    f_mount(BSP_FS_SD, "0:", 1);
+    f_mount(BSP_FS_W25QXX, "1:", 1);
 }
 

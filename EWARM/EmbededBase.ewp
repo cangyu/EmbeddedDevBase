@@ -343,7 +343,9 @@
                     <name>CCIncludePath2</name>
                     <state>$PROJ_DIR$\..\BSP</state>
                     <state>$PROJ_DIR$\..\APP</state>
+                    <state>$PROJ_DIR$\..\LIB\STM32_USB-FS-Device_Driver\inc</state>
                     <state>$PROJ_DIR$\..\LIB\STM32F10x_StdPeriph_Driver\inc</state>
+                    <state>$PROJ_DIR$\..\FATFS</state>
                 </option>
                 <option>
                     <name>CCStdIncCheck</name>
@@ -1365,7 +1367,9 @@
                     <name>CCIncludePath2</name>
                     <state>$PROJ_DIR$\..\BSP</state>
                     <state>$PROJ_DIR$\..\APP</state>
+                    <state>$PROJ_DIR$\..\LIB\STM32_USB-FS-Device_Driver\inc</state>
                     <state>$PROJ_DIR$\..\LIB\STM32F10x_StdPeriph_Driver\inc</state>
+                    <state>$PROJ_DIR$\..\FATFS</state>
                 </option>
                 <option>
                     <name>CCStdIncCheck</name>
@@ -2056,6 +2060,9 @@
             <name>$PROJ_DIR$\..\BSP\bsp.c</name>
         </file>
         <file>
+            <name>$PROJ_DIR$\..\BSP\bsp_sdcard.c</name>
+        </file>
+        <file>
             <name>$PROJ_DIR$\..\BSP\stm32f10x_it.c</name>
         </file>
         <file>
@@ -2094,6 +2101,21 @@
                 <configuration>Debug</configuration>
                 <configuration>Release</configuration>
             </excluded>
+        </file>
+    </group>
+    <group>
+        <name>FATFS</name>
+        <file>
+            <name>$PROJ_DIR$\..\FATFS\diskio.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\FATFS\ff.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\FATFS\ffsystem.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\FATFS\ffunicode.c</name>
         </file>
     </group>
     <group>

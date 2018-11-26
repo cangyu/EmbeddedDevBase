@@ -1,3 +1,2 @@
-# Blink
-For basic HW validation.  
-Predefind LED GPIOs are corresponding to the ALIENTEC board. 
+# TinyFS
+Code base for dev on STM32F103xx including USB, SD Card, SPI Flash and FATFS.  
