@@ -20,14 +20,11 @@ extern "C" {
 
 
 extern volatile uint32_t BSP_DLY_COUNTER;
-extern FATFS *BSP_FS_SD, *BSP_FS_W25QXX;
 
 void BSP_DLY_MS(uint32_t n);
 void BSP_LED_SetOn(uint8_t idx);
 void BSP_LED_SetOff(uint8_t idx);
 void BSP_LED_Toggle(uint8_t idx);
-bool BSP_SD_IsAvailable(void);
-bool BSP_W25QXX_IsAvailable(void);
 void BSP_Init(void);
 
 #ifdef __cplusplus

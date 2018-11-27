@@ -2106,16 +2106,13 @@
     <group>
         <name>FATFS</name>
         <file>
+            <name>$PROJ_DIR$\..\FATFS\option\cc936.c</name>
+        </file>
+        <file>
             <name>$PROJ_DIR$\..\FATFS\diskio.c</name>
         </file>
         <file>
             <name>$PROJ_DIR$\..\FATFS\ff.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\FATFS\ffsystem.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\FATFS\ffunicode.c</name>
         </file>
     </group>
     <group>

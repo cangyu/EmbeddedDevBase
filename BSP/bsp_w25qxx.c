@@ -254,29 +254,3 @@ void W25QXX_WAKEUP(void)
 	W25QXX_CS=1;                            	//取消片选     	      
     delay_us(3);                            	//等待TRES1
 }   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
