@@ -2,7 +2,13 @@
 
 uint32_t volatile BSP_DLY_COUNTER = 0;
 
-FATFS BSP_FS_Handle[2], *BSP_FS_SD, *BSP_FS_W25QXX;
+void SysTick_Handler(void)
+{
+    if(BSP_DLY_COUNTER)
+    {
+        --BSP_DLY_COUNTER;
+    }
+}
 
 void BSP_DLY_MS(uint32_t n)
 {

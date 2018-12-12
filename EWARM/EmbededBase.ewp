@@ -2060,25 +2060,13 @@
             <name>$PROJ_DIR$\..\BSP\bsp.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\BSP\bsp_sdcard.c</name>
+            <name>$PROJ_DIR$\..\BSP\bsp_w25qxx.c</name>
         </file>
         <file>
             <name>$PROJ_DIR$\..\BSP\stm32f10x_it.c</name>
         </file>
         <file>
             <name>$PROJ_DIR$\..\BSP\system_stm32f10x.c</name>
-        </file>
-    </group>
-    <group>
-        <name>FATFS</name>
-        <file>
-            <name>$PROJ_DIR$\..\FATFS\option\cc936.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\FATFS\diskio.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\FATFS\ff.c</name>
         </file>
     </group>
     <group>
