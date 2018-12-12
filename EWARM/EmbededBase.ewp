@@ -2070,12 +2070,6 @@
         </file>
     </group>
     <group>
-        <name>Startup</name>
-        <file>
-            <name>$PROJ_DIR$\startup\startup_stm32f103xe.s</name>
-        </file>
-    </group>
-    <group>
         <name>FATFS</name>
         <file>
             <name>$PROJ_DIR$\..\FATFS\option\cc936.c</name>
@@ -2161,8 +2155,11 @@
                 <name>$PROJ_DIR$\..\LIB\STM32F10x_StdPeriph_Driver\src\stm32f10x_wwdg.c</name>
             </file>
         </group>
-        <group>
-            <name>USB</name>
-        </group>
+    </group>
+    <group>
+        <name>Startup</name>
+        <file>
+            <name>$PROJ_DIR$\startup\startup_stm32f103xe.s</name>
+        </file>
     </group>
 </project>
