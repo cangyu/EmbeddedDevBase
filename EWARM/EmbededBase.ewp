@@ -2070,37 +2070,9 @@
         </file>
     </group>
     <group>
-        <name>CMSIS</name>
+        <name>Startup</name>
         <file>
-            <name>$PROJ_DIR$\startup\startup_stm32f10x_cl.s</name>
-            <excluded>
-                <configuration>Debug</configuration>
-                <configuration>Release</configuration>
-            </excluded>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\startup\startup_stm32f10x_hd.s</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\startup\startup_stm32f10x_ld.s</name>
-            <excluded>
-                <configuration>Debug</configuration>
-                <configuration>Release</configuration>
-            </excluded>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\startup\startup_stm32f10x_md.s</name>
-            <excluded>
-                <configuration>Debug</configuration>
-                <configuration>Release</configuration>
-            </excluded>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\startup\startup_stm32f10x_xl.s</name>
-            <excluded>
-                <configuration>Debug</configuration>
-                <configuration>Release</configuration>
-            </excluded>
+            <name>$PROJ_DIR$\startup\startup_stm32f103xe.s</name>
         </file>
     </group>
     <group>
