@@ -25,6 +25,17 @@ void BSP_Init(void)
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
     GPIO_PinRemapConfig(GPIO_Remap_SWJ_JTAGDisable, ENABLE); 
 
+    //Initialize common utilities
+    BSP_BTN_Init();
     BSP_LED_Init();
     BSP_W25QXX_Init();
+    BSP_BLE_Init();
+    
+    //For possible operation later on
+    FLASH_Unlock();
+    
+    //Avoid legacy HW flaw caused by
+    //capacitors connected to the keys!
+    //If exist, they will be charged when power on!
+    BSP_DLY_MS(200);
 }

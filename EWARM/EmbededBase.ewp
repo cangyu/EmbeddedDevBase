@@ -2051,13 +2051,31 @@
     <group>
         <name>APP</name>
         <file>
+            <name>$PROJ_DIR$\..\APP\common.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\APP\download.c</name>
+        </file>
+        <file>
             <name>$PROJ_DIR$\..\APP\main.cpp</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\APP\upload.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\APP\ymodem.c</name>
         </file>
     </group>
     <group>
         <name>BSP</name>
         <file>
             <name>$PROJ_DIR$\..\BSP\bsp.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\BSP\bsp_ble.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\BSP\bsp_btn.c</name>
         </file>
         <file>
             <name>$PROJ_DIR$\..\BSP\bsp_led.c</name>
